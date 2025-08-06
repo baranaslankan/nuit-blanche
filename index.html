@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>Nuit Blanche</title>
+  </head>
+  <body>
+    <footer class="footer">
+      <button class="footer-button active">
+        <svg class="footer-icon">
+          <use href="assets/images/home.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Home</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/calendar.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Exhibits</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/heart.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">My Events</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/person.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Profile</span>
+      </button>
+    </footer>
+  </body>
+
+  <script>
+    document.querySelectorAll(".footer-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document
+          .querySelectorAll(".footer-button")
+          .forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+      });
+    });
+  </script>
+</html>
