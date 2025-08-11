@@ -1129,6 +1129,18 @@ body {
   filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(97%) contrast(119%);
 }
 
+.exhibit-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: box-shadow 0.2s;
+}
+.exhibit-link:active .exhibit-card,
+.exhibit-link:focus .exhibit-card,
+.exhibit-link:hover .exhibit-card {
+  box-shadow: 0 0 0 2px #3fa9f5;
+}
+
 /* Responsive for mobile */
 @media (max-width: 500px) {
   .exhibits-main {

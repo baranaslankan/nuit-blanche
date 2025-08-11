@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <title>Toronto Nocturnes - Nuit Blanche</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" id="menuBtn">
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1 class="header-title">Exhibits</h1>
+    </div>
+    <div class="header-right"></div>
+  </header>
+  <main class="main-content">
+    <button onclick="window.history.back()" style="background:none;border:none;color:#8fadcc;font-size:18px;margin:12px 0;display:flex;align-items:center;gap:6px;cursor:pointer;">
+      <span style="font-size:22px;">&#8592;</span> Back
+    </button>
+    <img src="assets/images/2.svg" alt="Toronto Nocturnes" class="exhibit-image" style="width:100%;border-radius:8px;" />
+    <div style="padding:16px 0;">
+      <div style="font-weight:700;font-size:18px;">Toronto Nocturnes</div>
+      <div style="color:#8fadcc;font-size:14px;">Fri, Jul 12 · 9:00 PM · Brookfield Place, Courtyard, 181 Bay St, M5J 2T3</div>
+      <div style="margin:8px 0 0 0;display:flex;align-items:center;gap:8px;">
+        <img src="assets/images/live.svg" width="18" height="18" alt="Live" />
+        <span style="color:#8fadcc;font-size:13px;">Live update 17min ago</span>
+      </div>
+      <div style="margin:8px 0 0 0;display:flex;align-items:center;gap:8px;">
+        <img src="assets/images/crowd.svg" width="18" height="18" alt="Crowd" style="filter:invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(97%) contrast(119%);" />
+        <span style="color:#fff;font-size:13px;">Not too crowded</span>
+      </div>
+      <div style="margin:16px 0 0 0;display:flex;gap:8px;">
+        <button class="my-event-btn active"><img src="assets/images/heart.svg" width="18" height="18" alt="Interested" />Interested</button>
+        <button class="my-event-btn going-active"><img src="assets/images/tic.svg" width="18" height="18" alt="Going" />Going</button>
+      </div>
+    </div>
+    <div style="margin-top:24px;">
+      <div style="font-weight:700;font-size:16px;margin-bottom:8px;">Information</div>
+      <div style="color:#b6c3d1;font-size:14px;">
+        Artist: Ricardo Ocaranza<br>
+        Medium: Photography Installation<br>
+        Project type: Independent Project<br>
+        Curator: Yvonne Bosveld<br>
+        Neighborhood: Downtown<br>
+        Location: Brookfield Place, Courtyard, 181 Bay St, M5J 2T3<br>
+        Accessibility: Wheelchair Accessible
+      </div>
+      <div style="font-weight:700;font-size:16px;margin:18px 0 8px 0;">The Project</div>
+      <div style="color:#b6c3d1;font-size:14px;">
+        The Toronto Nocturnes is a photography installation by Ricardo Ocaranza that shows the city transformed by night to become something at once alien and vibrant, inhuman and lively.<br><br>
+        Every city has different looks, but at night, movements become blurry, the lack of traffic or the abundance, and the city lights make the environment feel more vibrant. The mix of shining surfaces and the darkness, the contrasting bright and the stillness, are perceived as both enchanting and oppressive, the transformation of the city into a place that is both familiar and strange. The work is a dark and vibrant form of street and urban portraiture, but at once something dreamlike and distant. The artist focuses on the transformation of the urban environment, the city as seen in a new focus, which depicts the city both as an inhuman, vibrant place, and as a space for new activities, and experiences. Through his events, street tradition and manipulation, the artist has created an impression that is visible to humans. The darkness is illuminating, the city is fleeting, the speed, however, the shot was taken no longer exists.
+      </div>
+      <div style="font-weight:700;font-size:16px;margin:18px 0 8px 0;">Artist</div>
+      <div style="color:#b6c3d1;font-size:14px;">
+        Ricardo Ocaranza
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <button class="footer-button" onclick="window.location.href='index.html'">
+      <svg class="footer-icon">
+        <use href="assets/images/home.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Home</span>
+    </button>
+    <button class="footer-button active">
+      <svg class="footer-icon">
+        <use href="assets/images/calendar.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Exhibits</span>
+    </button>
+    <button class="footer-button" onclick="window.location.href='my-events.html'">
+      <svg class="footer-icon">
+        <use href="assets/images/heart.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">My Events</span>
+    </button>
+    <button class="footer-button">
+      <svg class="footer-icon">
+        <use href="assets/images/person.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Profile</span>
+    </button>
+  </footer>
+</body>
+</html>
