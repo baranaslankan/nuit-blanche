@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>My Events - Nuit Blanche</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-btn" id="menuBtn">
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+      <div class="header-center">
+        <h1 class="header-title">My Events</h1>
+      </div>
+      <div class="header-right">
+        <button class="favorite-btn">
+          <svg width="24" height="24" fill="none">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="white" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu-dropdown" id="menuDropdown">
+      <div class="menu-content">
+        <nav class="menu-nav">
+          <a href="index.html" class="menu-item">Home page</a>
+          <a href="#" class="menu-item">Event</a>
+          <a href="my-events.html" class="menu-item">Saved Event</a>
+          <a href="#" class="menu-item">Schedule Event</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="main-content">
+      <!-- Filter Tabs -->
+      <section class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">
+          <svg width="20" height="20" fill="currentColor">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/>
+            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          All
+        </button>
+        <button class="filter-tab" data-filter="interested">
+          <svg width="20" height="20" fill="currentColor">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+          Interested
+        </button>
+        <button class="filter-tab" data-filter="going">
+          <svg width="20" height="20" fill="currentColor">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+          Going
+        </button>
+      </section>
+
+      <!-- Filter Dropdowns -->
+      <section class="filter-dropdowns">
+        <div class="filter-dropdown">
+          <button class="dropdown-btn">
+            Category
+            <svg width="16" height="16" fill="currentColor">
+              <path d="M4 6l4 4 4-4"/>
+            </svg>
+          </button>
+        </div>
+        <div class="filter-dropdown">
+          <button class="dropdown-btn">
+            Neighborhood
+            <svg width="16" height="16" fill="currentColor">
+              <path d="M4 6l4 4 4-4"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Events List -->
+      <section class="my-events-list" id="myEventsList">
+        <div class="no-events-message" id="noEventsMessage">
+          <p>No events found. Start by marking events as "Interested" or "Going" on the home page!</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <button class="footer-button" onclick="window.location.href='index.html'">
+        <svg class="footer-icon">
+          <use href="assets/images/home.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Home</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/calendar.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Exhibits</span>
+      </button>
+      <button class="footer-button active">
+        <svg class="footer-icon">
+          <use href="assets/images/heart.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">My Events</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/person.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Profile</span>
+      </button>
+    </footer>
+  </body>
+
+  <script>
+    // Get saved events from localStorage
+    function getSavedEvents() {
+      const interested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+      const going = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+      return { interested, going };
+    }
+
+    // Render events list
+    function renderEvents(filter = 'all') {
+      const { interested, going } = getSavedEvents();
+      const eventsList = document.getElementById('myEventsList');
+      const noEventsMessage = document.getElementById('noEventsMessage');
+      
+      let eventsToShow = [];
+      
+      if (filter === 'all') {
+        eventsToShow = [...interested, ...going];
+      } else if (filter === 'interested') {
+        eventsToShow = interested;
+      } else if (filter === 'going') {
+        eventsToShow = going;
+      }
+
+      // Remove duplicates (events that are both interested and going)
+      eventsToShow = eventsToShow.filter((event, index, self) => 
+        index === self.findIndex(e => e.title === event.title)
+      );
+
+      if (eventsToShow.length === 0) {
+        noEventsMessage.style.display = 'block';
+        return;
+      }
+
+      noEventsMessage.style.display = 'none';
+      
+      const eventsHTML = eventsToShow.map(event => {
+        const isInterested = interested.some(e => e.title === event.title);
+        const isGoing = going.some(e => e.title === event.title);
+        
+        return `
+          <div class="my-event-card">
+            <div class="my-event-header">
+              <div class="my-event-content">
+                <div class="my-event-details">
+                  <h3 class="my-event-title">${event.title}</h3>
+                  <p class="my-event-date">${event.date} · ${event.location}</p>
+                </div>
+                <div class="my-event-info">
+                  <div class="live-update">
+                    <img src="assets/images/live.svg" alt="Live" width="24" height="24" />
+                    Live update 17min ago
+                  </div>
+                  <div class="crowd-status ${event.crowdStatus === 'Very crowded' ? 'very-crowded' : ''}">
+                    <img src="assets/images/crowd.svg" alt="Crowd" width="24" height="24" />
+                    ${event.crowdStatus || 'Not too crowded'}
+                  </div>
+                </div>
+              </div>
+              <div class="my-event-image" style="background-image: url('${event.image}')"></div>
+            </div>
+            <div class="my-event-buttons">
+              <button class="event-btn ${isInterested ? 'interested active' : 'interested'}" data-type="interested" data-event='${JSON.stringify(event)}'>
+                <img src="assets/images/heart.svg" alt="Heart" class="event-btn-icon" />
+                Interested
+              </button>
+              <button class="event-btn ${isGoing ? 'going active' : 'going'}" data-type="going" data-event='${JSON.stringify(event)}'>
+                <img src="assets/images/tic.svg" alt="Check" class="event-btn-icon" />
+                Going
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      eventsList.innerHTML = eventsHTML;
+
+      // Add event listeners to buttons
+      document.querySelectorAll('.event-btn').forEach(btn => {
+        btn.addEventListener('click', handleEventButton);
+      });
+    }
+
+    // Handle event button clicks
+    function handleEventButton(e) {
+      const button = e.currentTarget;
+      const type = button.getAttribute('data-type');
+      const event = JSON.parse(button.getAttribute('data-event'));
+      
+      let interested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+      let going = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+
+      if (type === 'interested') {
+        const index = interested.findIndex(e => e.title === event.title);
+        if (index > -1) {
+          interested.splice(index, 1);
+        } else {
+          interested.push(event);
+        }
+        localStorage.setItem('interestedEvents', JSON.stringify(interested));
+      } else if (type === 'going') {
+        const index = going.findIndex(e => e.title === event.title);
+        if (index > -1) {
+          going.splice(index, 1);
+        } else {
+          going.push(event);
+        }
+        localStorage.setItem('goingEvents', JSON.stringify(going));
+      }
+
+      // Re-render events with current filter
+      const activeFilter = document.querySelector('.filter-tab.active').getAttribute('data-filter');
+      renderEvents(activeFilter);
+    }
+
+    // Filter tabs functionality
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.getAttribute('data-filter');
+        renderEvents(filter);
+      });
+    });
+
+    // Hamburger menu functionality
+    const menuBtn = document.querySelector('.menu-btn');
+    const hamburger = document.querySelector('.hamburger');
+    const menu = document.querySelector('.menu-dropdown');
+
+    menuBtn.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      
+      if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+      } else {
+        menu.style.display = 'block';
+      }
+    });
+
+    // Initialize page
+    renderEvents();
+  </script>
+</html>
