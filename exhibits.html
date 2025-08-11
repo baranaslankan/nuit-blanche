@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>Exhibits + Events - Nuit Blanche</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-btn" id="menuBtn">
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+      <div class="header-center">
+        <h1 class="header-title">EXHIBITS + EVENTS</h1>
+      </div>
+      <div class="header-right">
+        <button class="favorite-btn">
+          <svg width="24" height="24" fill="none">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="white" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu-dropdown" id="menuDropdown">
+      <div class="menu-content">
+        <nav class="menu-nav">
+          <a href="index.html" class="menu-item">Home page</a>
+          <a href="exhibits.html" class="menu-item">Exhibits + Events</a>
+          <a href="my-events.html" class="menu-item">Saved Event</a>
+          <a href="#" class="menu-item">Schedule Event</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="main-content exhibits-main">
+      <section class="exhibits-header">
+        <button class="schedule-btn">CHECK OUT THE SCHEDULE</button>
+        <div class="exhibits-filters">
+          <button class="dropdown-btn">ALL
+            <svg width="16" height="16" fill="currentColor">
+              <path d="M4 6l4 4 4-4"/>
+            </svg>
+          </button>
+          <button class="dropdown-btn">NEIGHBOURHOOD
+            <svg width="16" height="16" fill="currentColor">
+              <path d="M4 6l4 4 4-4"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="exhibits-grid">
+        <div class="exhibit-card">
+          <img src="assets/images/1.svg" alt="Balloonscape" class="exhibit-image" />
+          <div class="exhibit-info">
+            <div>
+              <h3 class="exhibit-title">Balloonscape</h3>
+              <p class="exhibit-type">Independent Projects</p>
+            </div>
+            <div class="exhibit-crowd crowd-red">
+              <img src="assets/images/crowd.svg" alt="Crowd" width="18" height="18" />
+            </div>
+          </div>
+        </div>
+        <div class="exhibit-card">
+          <img src="assets/images/2.svg" alt="Toronto Nocturnes" class="exhibit-image" />
+          <div class="exhibit-info">
+            <div>
+              <h3 class="exhibit-title">Toronto Nocturnes</h3>
+              <p class="exhibit-type">Photography Installation</p>
+            </div>
+            <div class="exhibit-crowd crowd-green">
+              <img src="assets/images/crowd.svg" alt="Crowd" width="18" height="18" />
+            </div>
+          </div>
+        </div>
+        <div class="exhibit-card">
+          <img src="assets/images/3.svg" alt="OVIAS" class="exhibit-image" />
+          <div class="exhibit-info">
+            <div>
+              <h3 class="exhibit-title">OVIAS</h3>
+              <p class="exhibit-type">Video Installation</p>
+            </div>
+            <div class="exhibit-crowd crowd-green">
+              <img src="assets/images/crowd.svg" alt="Crowd" width="18" height="18" />
+            </div>
+          </div>
+        </div>
+        <div class="exhibit-card">
+          <img src="assets/images/4.svg" alt="Shapeshifter" class="exhibit-image" />
+          <div class="exhibit-info">
+            <div>
+              <h3 class="exhibit-title">Shapeshifter</h3>
+              <p class="exhibit-type">Sculptural Installation</p>
+            </div>
+            <div class="exhibit-crowd crowd-red">
+              <img src="assets/images/crowd.svg" alt="Crowd" width="18" height="18" />
+            </div>
+          </div>
+        </div>
+        <div class="exhibit-card">
+          <img src="assets/images/5.svg" alt="Two Voices" class="exhibit-image" />
+          <div class="exhibit-info">
+            <div>
+              <h3 class="exhibit-title">Two Voices</h3>
+              <p class="exhibit-type">Installation</p>
+            </div>
+            <div class="exhibit-crowd crowd-red">
+              <img src="assets/images/crowd.svg" alt="Crowd" width="18" height="18" />
+            </div>
+          </div>
+        </div>
+        <div class="exhibit-card">
+          <img src="assets/images/6.svg" alt="White Dwarf" class="exhibit-image" />
+          <div class="exhibit-info">
+            <div>
+              <h3 class="exhibit-title">White Dwarf</h3>
+              <p class="exhibit-type">Sculptural Installation</p>
+            </div>
+            <div class="exhibit-crowd crowd-red">
+              <img src="assets/images/crowd.svg" alt="Crowd" width="18" height="18" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <button class="footer-button" onclick="window.location.href='index.html'">
+        <svg class="footer-icon">
+          <use href="assets/images/home.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Home</span>
+      </button>
+      <button class="footer-button active">
+        <svg class="footer-icon">
+          <use href="assets/images/calendar.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Exhibits</span>
+      </button>
+      <button class="footer-button" onclick="window.location.href='my-events.html'">
+        <svg class="footer-icon">
+          <use href="assets/images/heart.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">My Events</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/person.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Profile</span>
+      </button>
+    </footer>
+    <script>
+      // Hamburger menu functionality (reuse from my-events.html)
+      const menuBtn = document.querySelector('.menu-btn');
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.menu-dropdown');
+      menuBtn.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        if (menu.style.display === 'block') {
+          menu.style.display = 'none';
+        } else {
+          menu.style.display = 'block';
+        }
+      });
+    </script>
+  </body>
+</html>
