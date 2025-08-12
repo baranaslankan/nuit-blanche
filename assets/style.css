@@ -303,8 +303,6 @@ body {
   background: white;
   border: none;
   border-radius: 100px;
-  width: 22px;
-  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,12 +313,14 @@ body {
 
 .hero-nav-btn svg {
   fill: black;
-  width: 6px;
-  height: 10px;
 }
 
 .hero-nav-btn.prev {
   left: 16px;
+}
+
+.hero-nav-btn.prev svg {
+  transform: scaleX(-1);
 }
 
 .hero-nav-btn.next {
@@ -516,8 +516,13 @@ body {
   transition: all 0.3s ease;
 }
 
-.event-btn.active {
-  background: #1e3a8a;
+.event-btn.interested.active {
+  background: #2900E0;
+  color: white;
+}
+
+.event-btn.going.active {
+  background: #81C102;
   color: white;
 }
 
@@ -839,48 +844,7 @@ body {
   height: 56px;
 }
 
-.my-event-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 16px;
-  gap: 8px;
-  min-width: 84px;
-  max-width: 480px;
-  height: 40px;
-  background: #21364A;
-  border-radius: 20px;
-  border: none;
-  font-family: "SF Compact", sans-serif;
-  font-style: normal;
-  font-weight: 790;
-  font-size: 14px;
-  line-height: 21px;
-  text-align: center;
-  color: #FFFFFF;
-  cursor: pointer;
-}
 
-.my-event-btn img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) saturate(100%) invert(100%);
-}
-
-.my-event-btn.active {
-  background: #2900E0;
-  color: #FFFFFF;
-  width: 132px;
-  gap: 4px;
-}
-
-.my-event-btn.going-active {
-  background: #81C102;
-  color: #FFFFFF;
-  width: 96px;
-  gap: 4px;
-}
 
 .my-event-date {
   font-family: "SF Compact Regular", sans-serif;
@@ -924,31 +888,7 @@ body {
   gap: 12px;
 }
 
-.my-event-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 20px;
-  background: #21364A;
-  font-family: "SF Compact Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  cursor: pointer;
-  color: #CCCACA;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-}
 
-.my-event-btn.active {
-  background: #1e3a8a;
-  color: white;
-}
-
-.my-event-btn.going-active {
-  background: #4CAF50;
-  color: white;
-}
 
 .footer {
   background-color: #172633;

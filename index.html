@@ -7,6 +7,7 @@
     <title>Nuit Blanche</title>
   </head>
   <body>
+    <!-- Image Modal -->
     <div class="image-modal" id="imageModal">
       <div class="modal-overlay" id="modalOverlay"></div>
       <div class="modal-content">
@@ -93,13 +94,13 @@
             </div>
           </div>
           <button class="hero-nav-btn prev">
-            <svg width="24" height="24" fill="white">
-              <path d="M15 18l-6-6 6-6"/>
+            <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.76144 5.55547L1.15212 10L0 8.88906L4.03325 5L0 1.11094L1.15212 0L5.76144 4.44453C5.91419 4.59187 6 4.79167 6 5C6 5.20833 5.91419 5.40813 5.76144 5.55547Z" fill="black"/>
             </svg>
           </button>
           <button class="hero-nav-btn next">
-            <svg width="24" height="24" fill="white">
-              <path d="M9 18l6-6-6-6"/>
+            <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.76144 5.55547L1.15212 10L0 8.88906L4.03325 5L0 1.11094L1.15212 0L5.76144 4.44453C5.91419 4.59187 6 4.79167 6 5C6 5.20833 5.91419 5.40813 5.76144 5.55547Z" fill="black"/>
             </svg>
           </button>
           <div class="carousel-dots">
@@ -145,11 +146,11 @@
             <p class="event-location">181, Bay street</p>
             <p class="event-date">July 12 2025 . 7pm</p>
             <div class="event-buttons">
-              <button class="event-btn interested">
+              <button class="event-btn interested" data-title="Balloonscape" data-location="181, Bay street" data-date="July 12 2025 . 7pm" data-image="assets/images/3.svg">
                 <img src="assets/images/heart.svg" alt="Heart" class="event-btn-icon" />
                 Interested
               </button>
-              <button class="event-btn going">
+              <button class="event-btn going" data-title="Balloonscape" data-location="181, Bay street" data-date="July 12 2025 . 7pm" data-image="assets/images/3.svg">
                 <img src="assets/images/tic.svg" alt="Check" class="event-btn-icon" />
                 Going
               </button>
@@ -164,11 +165,11 @@
             <p class="event-location">225, Queen street</p>
             <p class="event-date">July 12 2025 . 7pm</p>
             <div class="event-buttons">
-              <button class="event-btn interested">
+              <button class="event-btn interested" data-title="OVIAs" data-location="225, Queen street" data-date="July 12 2025 . 7pm" data-image="assets/images/2.svg">
                 <img src="assets/images/heart.svg" alt="Heart" class="event-btn-icon" />
                 Interested
               </button>
-              <button class="event-btn going">
+              <button class="event-btn going" data-title="OVIAs" data-location="225, Queen street" data-date="July 12 2025 . 7pm" data-image="assets/images/2.svg">
                 <img src="assets/images/tic.svg" alt="Check" class="event-btn-icon" />
                 Going
               </button>
@@ -189,31 +190,31 @@
     </main>
 
     <footer class="footer">
-  <button class="footer-button active">
-    <svg class="footer-icon">
-      <use href="assets/images/home.svg" width="24" height="24"></use>
-    </svg>
-    <span class="footer-text">Home</span>
-  </button>
-  <button class="footer-button" onclick="window.location.href='exhibits.html'">
-    <svg class="footer-icon">
-      <use href="assets/images/calendar.svg" width="24" height="24"></use>
-    </svg>
-    <span class="footer-text">Exhibits</span>
-  </button>
-  <button class="footer-button" onclick="window.location.href='my-events.html'">
-    <svg class="footer-icon">
-      <use href="assets/images/heart.svg" width="24" height="24"></use>
-    </svg>
-    <span class="footer-text">My Events</span>
-  </button>
-  <button class="footer-button">
-    <svg class="footer-icon">
-      <use href="assets/images/person.svg" width="24" height="24"></use>
-    </svg>
-    <span class="footer-text">Profile</span>
-  </button>
-</footer>
+      <button class="footer-button active">
+        <svg class="footer-icon">
+          <use href="assets/images/home.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Home</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/calendar.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Exhibits</span>
+      </button>
+      <button class="footer-button" onclick="window.location.href='my-events.html'">
+        <svg class="footer-icon">
+          <use href="assets/images/heart.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">My Events</span>
+      </button>
+      <button class="footer-button">
+        <svg class="footer-icon">
+          <use href="assets/images/person.svg" width="24" height="24"></use>
+        </svg>
+        <span class="footer-text">Profile</span>
+      </button>
+    </footer>
   </body>
 
   <script>
@@ -315,70 +316,76 @@
       let events = JSON.parse(localStorage.getItem(type + 'Events') || '[]');
       const eventIndex = events.findIndex(e => e.title === eventData.title);
       
-      // Remove all active states first
-      button.classList.remove('interested-active', 'going-active', 'active');
-      
       if (eventIndex > -1) {
         // Remove event
         events.splice(eventIndex, 1);
-        // Button remains in default state (no active class)
+        button.classList.remove('active');
       } else {
         // Add event
         events.push(eventData);
-        if (type === 'interested') {
-          button.classList.add('interested-active');
-        } else if (type === 'going') {
-          button.classList.add('going-active');
-        }
+        button.classList.add('active');
       }
       
       localStorage.setItem(type + 'Events', JSON.stringify(events));
-      
-      // Force a repaint to ensure immediate visual feedback
-      button.offsetHeight;
+    }
+
+    // Handle event button clicks
+    function handleEventButton(button, eventData, type) {
+      let interested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+      let going = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+
+      if (type === 'interested') {
+        const index = interested.findIndex(e => e.title === eventData.title);
+        if (index > -1) {
+          interested.splice(index, 1);
+          button.classList.remove('active');
+        } else {
+          interested.push(eventData);
+          button.classList.add('active');
+        }
+        localStorage.setItem('interestedEvents', JSON.stringify(interested));
+      } else if (type === 'going') {
+        const index = going.findIndex(e => e.title === eventData.title);
+        if (index > -1) {
+          going.splice(index, 1);
+          button.classList.remove('active');
+        } else {
+          going.push(eventData);
+          button.classList.add('active');
+        }
+        localStorage.setItem('goingEvents', JSON.stringify(going));
+      }
     }
 
     // Initialize event buttons
     document.querySelectorAll('.event-btn').forEach(button => {
-      const isInterested = button.textContent.trim().includes('Interested');
-      const isGoing = button.textContent.trim().includes('Going');
+      const isInterested = button.classList.contains('interested');
+      const isGoing = button.classList.contains('going');
       
-      // Get event data from the card
-      const eventCard = button.closest('.event-card');
-      const eventTitle = eventCard.querySelector('.event-title').textContent;
-      const eventLocation = eventCard.querySelector('.event-location').textContent;
-      const eventDate = eventCard.querySelector('.event-date').textContent;
-      const eventImage = eventCard.querySelector('.event-image').src;
-      
+      // Get event data from button attributes
       const eventData = {
-        title: eventTitle,
-        location: eventLocation,
-        date: eventDate,
-        image: eventImage,
-        crowdStatus: eventTitle.includes('Electric') ? 'Very crowded' : 'Not too crowded'
+        title: button.getAttribute('data-title'),
+        location: button.getAttribute('data-location'),
+        date: button.getAttribute('data-date'),
+        image: button.getAttribute('data-image'),
+        crowdStatus: 'Not too crowded'
       };
 
-      // Clear any existing active states
-      button.classList.remove('interested-active', 'going-active', 'active');
-
-      // Check if event is already saved and apply correct state
+      // Check if event is already saved
       if (isInterested) {
         const interestedEvents = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
-        if (interestedEvents.some(e => e.title === eventTitle)) {
-          button.classList.add('interested-active');
+        if (interestedEvents.some(e => e.title === eventData.title)) {
+          button.classList.add('active');
         }
       } else if (isGoing) {
         const goingEvents = JSON.parse(localStorage.getItem('goingEvents') || '[]');
-        if (goingEvents.some(e => e.title === eventTitle)) {
-          button.classList.add('going-active');
+        if (goingEvents.some(e => e.title === eventData.title)) {
+          button.classList.add('active');
         }
       }
 
       // Add click event listener
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
+      button.addEventListener('click', () => {
         if (isInterested) {
           handleEventButton(button, eventData, 'interested');
         } else if (isGoing) {
