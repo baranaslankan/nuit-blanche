@@ -1112,14 +1112,6 @@ body {
   padding: 18px 16px 0 16px;
   background: #101c27;
 }
-.header-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
 /* Schedule button */
 .schedule-btn {
   display: block;
