@@ -44,23 +44,15 @@
       <!-- Filter Tabs -->
       <section class="filter-tabs">
         <button class="filter-tab active" data-filter="all">
-          <svg width="20" height="20" fill="currentColor">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/>
-            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
-            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
-          </svg>
+          <img src="assets/images/calendar.svg" alt="Calendar" width="18" height="20" />
           All
         </button>
         <button class="filter-tab" data-filter="interested">
-          <svg width="20" height="20" fill="currentColor">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" fill="none"/>
-          </svg>
+          <img src="assets/images/heart.svg" alt="Heart" width="18" height="20" />
           Interested
         </button>
         <button class="filter-tab" data-filter="going">
-          <svg width="20" height="20" fill="currentColor">
-            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" fill="none"/>
-          </svg>
+          <img src="assets/images/tic.svg" alt="Check" width="18" height="20" />
           Going
         </button>
       </section>
@@ -100,7 +92,7 @@
         </svg>
         <span class="footer-text">Home</span>
       </button>
-      <button class="footer-button">
+      <button class="footer-button" onclick="window.location.href='exhibits.html'">
         <svg class="footer-icon">
           <use href="assets/images/calendar.svg" width="24" height="24"></use>
         </svg>
@@ -135,6 +127,66 @@
       const eventsList = document.getElementById('myEventsList');
       const noEventsMessage = document.getElementById('noEventsMessage');
       
+      // Add sample data if no events exist for demo
+      if (interested.length === 0 && going.length === 0) {
+        const sampleEvents = [
+          {
+            title: "Balloonscape",
+            location: "181 Bay St", 
+            date: "Fri, Jul 12 • 7:00 PM",
+            image: "assets/images/3.svg",
+            crowdStatus: "Not too crowded"
+          },
+          {
+            title: "Electric Fountain",
+            location: "380 Queen st",
+            date: "Fri, Oct 4 • 7:00 PM", 
+            image: "assets/images/electric.svg",
+            crowdStatus: "Very crowded"
+          },
+          {
+            title: "Under the Sea",
+            location: "The Tech Hub",
+            date: "Fri, Oct 4 • 7:00 PM",
+            image: "assets/images/sea.svg", 
+            crowdStatus: "Not too crowded"
+          },
+          {
+            title: "OVIAS",
+            location: "225 Queen",
+            date: "Fri, Jul 12 • 7:00 PM",
+            image: "assets/images/2.svg",
+            crowdStatus: "Not too crowded"
+          }
+        ];
+        
+        // Clear and add sample events to localStorage
+        localStorage.clear();
+        localStorage.setItem('interestedEvents', JSON.stringify([sampleEvents[0], sampleEvents[2], sampleEvents[3]]));
+        localStorage.setItem('goingEvents', JSON.stringify([sampleEvents[1], sampleEvents[3]]));
+        
+        // Reload with sample data
+        const newInterested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+        const newGoing = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+        
+        let eventsToShow = [];
+        if (filter === 'all') {
+          eventsToShow = [...newInterested, ...newGoing];
+        } else if (filter === 'interested') {
+          eventsToShow = newInterested;
+        } else if (filter === 'going') {
+          eventsToShow = newGoing;
+        }
+        
+        // Remove duplicates
+        eventsToShow = eventsToShow.filter((event, index, self) => 
+          index === self.findIndex(e => e.title === event.title)
+        );
+        
+        displayEventCards(eventsToShow, newInterested, newGoing);
+        return;
+      }
+      
       let eventsToShow = [];
       
       if (filter === 'all') {
@@ -150,8 +202,16 @@
         index === self.findIndex(e => e.title === event.title)
       );
 
+      displayEventCards(eventsToShow, interested, going);
+    }
+    
+    function displayEventCards(eventsToShow, interested, going) {
+      const eventsList = document.getElementById('myEventsList');
+      const noEventsMessage = document.getElementById('noEventsMessage');
+
       if (eventsToShow.length === 0) {
         noEventsMessage.style.display = 'block';
+        eventsList.innerHTML = '';
         return;
       }
 
@@ -164,19 +224,20 @@
         return `
           <div class="my-event-card">
             <div class="my-event-header">
-              <div class="my-event-content">
+              <div class="my-event-info">
+                <h3 class="my-event-title">${event.title}</h3>
                 <div class="my-event-details">
-                  <h3 class="my-event-title">${event.title}</h3>
-                  <p class="my-event-date">${event.date} · ${event.location}</p>
+                  <p class="my-event-date">${event.date}</p>
+                  <p class="my-event-location">${event.location}</p>
                 </div>
-                <div class="my-event-info">
-                  <div class="live-update">
-                    <img src="assets/images/live.svg" alt="Live" width="24" height="24" />
-                    Live update 17min ago
+                <div class="my-event-status">
+                  <div class="live-status">
+                    <img src="assets/images/live.svg" alt="Live" />
+                    <span>Live update 17min ago</span>
                   </div>
                   <div class="crowd-status ${event.crowdStatus === 'Very crowded' ? 'very-crowded' : ''}">
-                    <img src="assets/images/crowd.svg" alt="Crowd" width="24" height="24" />
-                    ${event.crowdStatus || 'Not too crowded'}
+                    <img src="assets/images/crowd.svg" alt="Crowd" />
+                    <span>${event.crowdStatus || 'Not too crowded'}</span>
                   </div>
                 </div>
               </div>
@@ -198,10 +259,12 @@
 
       eventsList.innerHTML = eventsHTML;
 
-      // Add event listeners to buttons
-      document.querySelectorAll('.event-btn').forEach(btn => {
-        btn.addEventListener('click', handleEventButton);
-      });
+      // Add event listeners to buttons after DOM update
+      setTimeout(() => {
+        document.querySelectorAll('.my-events-list .event-btn').forEach(btn => {
+          btn.addEventListener('click', handleEventButton);
+        });
+      }, 0);
     }
 
     // Handle event button clicks
@@ -262,6 +325,42 @@
     });
 
     // Initialize page
+    // Force refresh sample data with correct images
+    const sampleEvents = [
+      {
+        title: "Balloonscape",
+        location: "181 Bay St", 
+        date: "Fri, Jul 12 • 7:00 PM",
+        image: "assets/images/3.svg",
+        crowdStatus: "Not too crowded"
+      },
+      {
+        title: "Electric Fountain",
+        location: "380 Queen st",
+        date: "Fri, Oct 4 • 7:00 PM", 
+        image: "assets/images/electric.svg",
+        crowdStatus: "Very crowded"
+      },
+      {
+        title: "Under the Sea",
+        location: "The Tech Hub",
+        date: "Fri, Oct 4 • 7:00 PM",
+        image: "assets/images/sea.svg", 
+        crowdStatus: "Not too crowded"
+      },
+      {
+        title: "OVIAS",
+        location: "225 Queen",
+        date: "Fri, Jul 12 • 7:00 PM",
+        image: "assets/images/2.svg",
+        crowdStatus: "Not too crowded"
+      }
+    ];
+    
+    // Clear old data and set new data with correct images
+    localStorage.setItem('interestedEvents', JSON.stringify([sampleEvents[0], sampleEvents[2], sampleEvents[3]]));
+    localStorage.setItem('goingEvents', JSON.stringify([sampleEvents[1], sampleEvents[3]]));
+    
     renderEvents();
   </script>
 </html>

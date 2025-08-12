@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <title>Balloonscape - Nuit Blanche</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" id="menuBtn">
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1 class="header-title">Exhibits</h1>
+    </div>
+    <div class="header-right"></div>
+  </header>
+  <main class="main-content">
+    <button onclick="window.history.back()" style="background:none;border:none;color:#8fadcc;font-size:18px;margin:12px 0;display:flex;align-items:center;gap:6px;cursor:pointer;">
+      <span style="font-size:22px;">&#8592;</span> Back
+    </button>
+    <img src="assets/images/1.svg" alt="Balloonscape" class="exhibit-image" style="width:100%;border-radius:8px;" />
+    <div style="padding:16px 0;">
+      <div style="font-weight:700;font-size:18px;">Balloonscape</div>
+      <div style="color:#8fadcc;font-size:14px;">Fri, Jul 12 · 7:00 PM · Eaton Centre</div>
+      <div style="margin:8px 0 0 0;display:flex;align-items:center;gap:8px;">
+        <img src="assets/images/live.svg" width="18" height="18" alt="Live" />
+        <span style="color:#8fadcc;font-size:13px;">Live update 17min ago</span>
+      </div>
+      <div style="margin:8px 0 0 0;display:flex;align-items:center;gap:8px;">
+        <img src="assets/images/crowd.svg" width="18" height="18" alt="Crowd" style="filter:invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(97%) contrast(119%);" />
+        <span style="color:#fff;font-size:13px;">Not too crowded</span>
+      </div>
+      <div style="margin:16px 0 0 0;display:flex;gap:8px;">
+        <button class="event-btn interested" data-title="Balloonscape" data-location="Eaton Centre" data-date="Fri, Jul 12 · 7:00 PM" data-image="assets/images/1.svg">
+          <img src="assets/images/heart.svg" alt="Heart" class="event-btn-icon" />
+          Interested
+        </button>
+        <button class="event-btn going" data-title="Balloonscape" data-location="Eaton Centre" data-date="Fri, Jul 12 · 7:00 PM" data-image="assets/images/1.svg">
+          <img src="assets/images/tic.svg" alt="Check" class="event-btn-icon" />
+          Going
+        </button>
+      </div>
+    </div>
+    <div style="margin-top:24px;">
+      <div style="font-weight:700;font-size:16px;margin-bottom:8px;">Information</div>
+      <div style="color:#b6c3d1;font-size:14px;">
+        Artist: Anna Madeiska<br>
+        Medium: Sculpture<br>
+        Project type: Independent Projects<br>
+        Neighborhood: Downtown<br>
+        Location: Eaton Centre, 220 Yonge St M5B 2H1<br>
+        Accessibility: Wheelchair Accessible
+      </div>
+      <div style="font-weight:700;font-size:16px;margin:18px 0 8px 0;">The Project</div>
+      <div style="color:#b6c3d1;font-size:14px;">
+        The Eaton Centre is transformed as balloons are used to construct a psychedelic landscape of swaying tunnels and extensions.<br><br>
+        A maze-like fort of balloons is formed; its airy terrain is a tangle of countless interior chambers. People are invited to add to the structure, enter into it or just explore its various wings.
+      </div>
+      <div style="font-weight:700;font-size:16px;margin:18px 0 8px 0;">Artist</div>
+      <div style="color:#b6c3d1;font-size:14px;">
+        Anna Madeiska
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <button class="footer-button" onclick="window.location.href='index.html'">
+      <svg class="footer-icon">
+        <use href="assets/images/home.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Home</span>
+    </button>
+    <button class="footer-button active">
+      <svg class="footer-icon">
+        <use href="assets/images/calendar.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Exhibits</span>
+    </button>
+    <button class="footer-button" onclick="window.location.href='my-events.html'">
+      <svg class="footer-icon">
+        <use href="assets/images/heart.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">My Events</span>
+    </button>
+    <button class="footer-button">
+      <svg class="footer-icon">
+        <use href="assets/images/person.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Profile</span>
+    </button>
+  </footer>
+
+  <script>
+    // Handle event button clicks
+    function handleEventButton(button, eventData, type) {
+      let interested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+      let going = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+
+      if (type === 'interested') {
+        const index = interested.findIndex(e => e.title === eventData.title);
+        if (index > -1) {
+          interested.splice(index, 1);
+          button.classList.remove('active');
+        } else {
+          interested.push(eventData);
+          button.classList.add('active');
+        }
+        localStorage.setItem('interestedEvents', JSON.stringify(interested));
+      } else if (type === 'going') {
+        const index = going.findIndex(e => e.title === eventData.title);
+        if (index > -1) {
+          going.splice(index, 1);
+          button.classList.remove('active');
+        } else {
+          going.push(eventData);
+          button.classList.add('active');
+        }
+        localStorage.setItem('goingEvents', JSON.stringify(going));
+      }
+    }
+
+    // Initialize event buttons
+    document.querySelectorAll('.event-btn').forEach(button => {
+      const isInterested = button.classList.contains('interested');
+      const isGoing = button.classList.contains('going');
+      
+      // Get event data from button attributes
+      const eventData = {
+        title: button.getAttribute('data-title'),
+        location: button.getAttribute('data-location'),
+        date: button.getAttribute('data-date'),
+        image: button.getAttribute('data-image'),
+        crowdStatus: 'Not too crowded'
+      };
+
+      // Check if event is already saved
+      if (isInterested) {
+        const interestedEvents = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+        if (interestedEvents.some(e => e.title === eventData.title)) {
+          button.classList.add('active');
+        }
+      } else if (isGoing) {
+        const goingEvents = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+        if (goingEvents.some(e => e.title === eventData.title)) {
+          button.classList.add('active');
+        }
+      }
+
+      // Add click event listener
+      button.addEventListener('click', () => {
+        if (isInterested) {
+          handleEventButton(button, eventData, 'interested');
+        } else if (isGoing) {
+          handleEventButton(button, eventData, 'going');
+        }
+      });
+    });
+
+    // Hamburger menu functionality
+    const menuBtn = document.querySelector('.menu-btn');
+    const hamburger = document.querySelector('.hamburger');
+    const menu = document.querySelector('.menu-dropdown');
+
+    if (menuBtn && hamburger && menu) {
+      menuBtn.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        
+        if (menu.style.display === 'block') {
+          menu.style.display = 'none';
+        } else {
+          menu.style.display = 'block';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

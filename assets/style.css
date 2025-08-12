@@ -501,7 +501,7 @@ body {
 }
 
 .event-btn {
-  padding: 5px 10px;
+  padding: 0px 16px;
   border: none;
   border-radius: 20px;
   background: #21364A;
@@ -511,9 +511,31 @@ body {
   cursor: pointer;
   color: #CCCACA;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 84px;
+  max-width: 480px;
+  height: 40px;
+  flex: none;
+  flex-grow: 0;
+}
+
+/* Homepage specific button styles */
+.homepage .event-btn.interested {
+  padding: 5px 10px;
   gap: 9px;
-  transition: all 0.3s ease;
+  width: 106px;
+  height: 31px;
+}
+
+.homepage .event-btn.going {
+  padding: 5px 10px;
+  gap: 12px;
+  width: 83px;
+  height: 31px;
 }
 
 .event-btn.interested.active {
@@ -534,7 +556,11 @@ body {
   width: 16px;
   height: 16px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(81%) sepia(1%) saturate(1066%) hue-rotate(314deg) brightness(94%) contrast(87%);
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.event-btn.active .event-btn-icon {
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .gallery-section {
@@ -619,11 +645,19 @@ body {
 }
 
 /* My Events Page Styles */
+.main-content {
+  max-width: 390px;
+  margin: 0 auto;
+  padding: 0 16px;
+  padding-bottom: 100px;
+}
+
 .filter-tabs {
   display: flex;
   gap: 0;
   margin-bottom: 16px;
   border-bottom: 1px solid #21364A;
+  width: 100%;
 }
 
 .filter-tab {
@@ -649,9 +683,17 @@ body {
   border-bottom-color: white;
 }
 
-.filter-tab svg {
-  width: 16px;
-  height: 16px;
+.filter-tab svg,
+.filter-tab img {
+  width: 18px;
+  height: 20px;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(64%) sepia(18%) saturate(367%) hue-rotate(180deg) brightness(91%) contrast(94%);
+}
+
+.filter-tab.active svg,
+.filter-tab.active img {
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .filter-dropdowns {
@@ -683,9 +725,9 @@ body {
 .my-events-list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  width: 390px;
+  gap: 16px;
+  padding: 0;
+  width: 100%;
 }
 
 .no-events-message {
@@ -697,25 +739,72 @@ body {
 }
 
 .my-event-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  background: transparent;
+  border-radius: 12px;
   padding: 16px;
-  width: 390px;
-  height: 206px;
+  width: 100%;
   box-sizing: border-box;
+  margin-bottom: 8px;
 }
 
 .my-event-header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0px;
   gap: 16px;
-  width: 358px;
-  height: 118px;
-  border-radius: 12px;
+  margin-bottom: 37px;
+}
+
+.my-event-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.my-event-title {
+  color: white;
+  font-family: "SF Compact", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.my-event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.my-event-date,
+.my-event-location {
+  color: #8fadcc;
+  font-family: "SF Compact Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.my-event-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 21px;
+}
+
+.live-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #8fadcc;
+  font-family: "SF Compact Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.live-status img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .my-event-content {
@@ -817,11 +906,11 @@ body {
 .crowd-status img {
   width: 24px;
   height: 24px;
-  filter: brightness(0) saturate(100%) invert(85%) sepia(100%) saturate(352%) hue-rotate(53deg) brightness(103%) contrast(103%);
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .crowd-status.very-crowded img {
-  filter: brightness(0) saturate(100%) invert(10%) sepia(100%) saturate(7471%) hue-rotate(1deg) brightness(98%) contrast(117%);
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .my-event-image {
@@ -830,21 +919,50 @@ body {
   background-size: cover;
   background-position: center;
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .my-event-buttons {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: flex-start;
-  padding: 16px 0px 0px;
-  gap: 12px;
-  width: 358px;
-  height: 56px;
+  gap: 8px;
+  margin-top: 0;
 }
 
+.my-event-buttons .event-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 20px;
+  background: #21364A;
+  font-family: "SF Compact Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  color: #CCCACA;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 80px;
+  height: 32px;
+  flex: none;
+  justify-content: center;
+}
 
+.my-event-buttons .event-btn.interested.active {
+  background: #2900E0;
+  color: white;
+}
+
+.my-event-buttons .event-btn.going.active {
+  background: #81C102;
+  color: white;
+}
+
+.my-event-buttons .event-btn-icon {
+  width: 14px;
+  height: 14px;
+  filter: brightness(0) saturate(100%) invert(100%);
+}
 
 .my-event-date {
   font-family: "SF Compact Regular", sans-serif;
@@ -880,7 +998,7 @@ body {
   font-family: "SF Compact Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: #8fadcc;
+  color: #D2FFD3;
 }
 
 .my-event-buttons {
@@ -893,26 +1011,32 @@ body {
 .footer {
   background-color: #172633;
   border-top: 1px solid #21364a;
-  padding: 8px 16px 12px 16px;
+  padding: 12px 24px 16px 24px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 100;
+  max-width: 390px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .footer-button {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  width: 83px;
+  min-width: 64px;
+  flex: 1;
   background-color: transparent;
   border: none;
-  padding-top: 4px;
-  padding-bottom: 0;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .footer-icon {
@@ -933,14 +1057,17 @@ body {
 
 .footer-text {
   font-family: "SF Compact Medium", sans-serif;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 11px;
+  line-height: 16px;
   letter-spacing: 0px;
   color: #8fadcc;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .footer-button.active > .footer-text {
   font-family: "SF Compact", sans-serif;
+  font-weight: 600;
   color: #ffffff;
 }
 
@@ -1069,6 +1196,18 @@ body {
   filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(97%) contrast(119%);
 }
 
+.exhibit-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: box-shadow 0.2s;
+}
+.exhibit-link:active .exhibit-card,
+.exhibit-link:focus .exhibit-card,
+.exhibit-link:hover .exhibit-card {
+  box-shadow: 0 0 0 2px #3fa9f5;
+}
+
 /* Responsive for mobile */
 @media (max-width: 500px) {
   .exhibits-main {
@@ -1078,4 +1217,112 @@ body {
   .exhibits-grid {
     gap: 12px 8px;
   }
+}
+
+/* Exhibit Detail Page Styles */
+.back-btn {
+  background: none;
+  border: none;
+  color: #8fadcc;
+  font-size: 18px;
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: "SF Compact Regular", sans-serif;
+}
+
+.back-btn span {
+  font-size: 22px;
+}
+
+.detail-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.detail-header {
+  padding: 16px 0;
+}
+
+.detail-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+  margin: 0 0 8px 0;
+  font-family: "SF Compact", sans-serif;
+}
+
+.detail-meta {
+  color: #8fadcc;
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  font-family: "SF Compact Regular", sans-serif;
+}
+
+.detail-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  font-family: "SF Compact Regular", sans-serif;
+}
+
+.detail-status img {
+  width: 18px;
+  height: 18px;
+}
+
+.detail-status span {
+  font-size: 13px;
+}
+
+.live-status span {
+  color: #8fadcc;
+}
+
+.crowd-status span {
+  color: #D2FFD3;
+}
+
+.crowd-status.very-crowded span {
+  color: #FF0303;
+}
+
+.crowd-status img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.detail-buttons {
+  margin: 16px 0;
+  display: flex;
+  gap: 8px;
+}
+
+.detail-content {
+  margin-top: 24px;
+}
+
+.detail-section-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 18px 0 8px 0;
+  color: white;
+  font-family: "SF Compact", sans-serif;
+}
+
+.detail-section-title:first-child {
+  margin-top: 0;
+}
+
+.detail-text {
+  color: #b6c3d1;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: "SF Compact Regular", sans-serif;
+  margin: 0;
 }

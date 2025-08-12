@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <title>Toronto Nocturnes - Nuit Blanche</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" id="menuBtn">
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1 class="header-title">Exhibits</h1>
+    </div>
+    <div class="header-right"></div>
+  </header>
+  <main class="main-content">
+    <button onclick="window.history.back()" class="back-btn">
+      <span>←</span> Back
+    </button>
+    
+    <img src="assets/images/2.svg" alt="Toronto Nocturnes" class="detail-image" />
+    
+    <div class="detail-header">
+      <h1 class="detail-title">Toronto Nocturnes</h1>
+      <p class="detail-meta">Fri, Jul 12 · 9:30PM · Brookfield Place, Courtyard, 181 Bay St, M5J 2T3</p>
+      
+      <div class="detail-status live-status">
+        <img src="assets/images/live.svg" alt="Live" />
+        <span>Live update 17min ago</span>
+      </div>
+      
+      <div class="detail-status crowd-status">
+        <img src="assets/images/crowd.svg" alt="Crowd" />
+        <span>Not too crowded</span>
+      </div>
+      
+      <div class="detail-buttons">
+        <button class="event-btn interested" data-title="Toronto Nocturnes" data-location="Brookfield Place" data-date="Fri, Jul 12 · 9:30PM" data-image="assets/images/2.svg">
+          <img src="assets/images/heart.svg" alt="Heart" class="event-btn-icon" />
+          Interested
+        </button>
+        <button class="event-btn going" data-title="Toronto Nocturnes" data-location="Brookfield Place" data-date="Fri, Jul 12 · 9:30PM" data-image="assets/images/2.svg">
+          <img src="assets/images/tic.svg" alt="Check" class="event-btn-icon" />
+          Going
+        </button>
+      </div>
+    </div>
+    
+    <div class="detail-content">
+      <h2 class="detail-section-title">Information</h2>
+      <div class="detail-text">
+        Artist: Ricardo Okaranza<br>
+        Medium: Photography Installation<br>
+        Project type: HONEST<br>
+        Curator: Wayne Baerwaldt<br>
+        Neighborhood: Downtown<br>
+        Location: Brookfield Place, Courtyard, 181 Bay St, M5J 2T3<br>
+        Accessibility: Wheelchair Accessible
+      </div>
+      
+      <h2 class="detail-section-title">The Project</h2>
+      <div class="detail-text">
+        The Toronto Nocturnes is a photography installation by Ricardo Okaranza that shows the city transformed by night to become something at once still and vibrant, inhuman and lively.<br><br>
+        Every city has other faces, but at night this essence becomes more obvious. It is not only the monuments and the city sights that make the difference, but there is also a way of mixing the built environment with nature. The less obvious things such as the sidewalks, paved roads, benches and street lamps, are characteristic to every city, and the night is the best time to view them. There is a dark loneliness and a sense of menace in and around urban forms due to something dangerous is present, but because the transience of all is so clear. In The Nocturnes, (night shots), the city is seen with a new focus. Without people, the artefacts are more visible, and together, build an essential, memorable cityscape.Photography is the best medium to represent this night life without any humans. The medium is quite unable to 'fix' or suspend life, because life, like time, is fleeting. The exact moment the shot was taken no longer exists.
+      </div>
+      
+      <h2 class="detail-section-title">Artist</h2>
+      <div class="detail-text">
+        Ricardo Okaranza
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <button class="footer-button" onclick="window.location.href='index.html'">
+      <svg class="footer-icon">
+        <use href="assets/images/home.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Home</span>
+    </button>
+    <button class="footer-button active">
+      <svg class="footer-icon">
+        <use href="assets/images/calendar.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Exhibits</span>
+    </button>
+    <button class="footer-button" onclick="window.location.href='my-events.html'">
+      <svg class="footer-icon">
+        <use href="assets/images/heart.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">My Events</span>
+    </button>
+    <button class="footer-button">
+      <svg class="footer-icon">
+        <use href="assets/images/person.svg" width="24" height="24"></use>
+      </svg>
+      <span class="footer-text">Profile</span>
+    </button>
+  </footer>
+</body>
+</html>
