@@ -14,7 +14,7 @@ body {
   margin: 0;
   height: 100%;
   min-height: 100%;
-  background-color: #0F1924;
+  background-color: #0f1924;
   color: white;
   font-family: "SF Compact Medium", sans-serif;
   max-width: 390px;
@@ -79,7 +79,7 @@ body {
   font-family: "SF Compact Regular", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  color: #CCCACA;
+  color: #cccaca;
   text-decoration: none;
   transition: color 0.3s ease;
   text-align: center;
@@ -113,7 +113,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 18px 16px;
-  background-color: #0F1924;
+  background-color: #0f1924;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -121,7 +121,8 @@ body {
   box-sizing: border-box;
 }
 
-.menu-btn, .favorite-btn {
+.menu-btn,
+.favorite-btn {
   background: none;
   border: none;
   padding: 8px;
@@ -203,7 +204,7 @@ body {
   font-family: "SF Compact Regular", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  color: #CCCACA;
+  color: #cccaca;
   text-decoration: none;
   transition: color 0.3s ease;
   text-align: center;
@@ -236,7 +237,7 @@ body {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  height: 260px;
+  height: 400px;
 }
 
 .carousel-slides {
@@ -282,7 +283,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
   padding: 20px;
   display: flex;
   align-items: flex-end;
@@ -337,11 +338,37 @@ body {
   z-index: 10;
 }
 
+.carousel-check-button {
+  font-family: "SF Compact Regular";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 23px;
+  color: #E8E7E7;
+  letter-spacing: 0%;
+  padding: 10px 22.5px;
+  background-color: #21364A;
+  border-radius: 30px;
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 10;
+  text-decoration: none;
+  transition: all 0.7s;
+}
+
+.carousel-check-button:hover {
+  color: #21364A;
+  background-color: #FFFFFF;
+}
+
 .dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #B6B1B1;
+  background-color: #b6b1b1;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -504,12 +531,12 @@ body {
   padding: 0px 16px;
   border: none;
   border-radius: 20px;
-  background: #21364A;
+  background: #21364a;
   font-family: "SF Compact Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
   cursor: pointer;
-  color: #CCCACA;
+  color: #cccaca;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -539,12 +566,12 @@ body {
 }
 
 .event-btn.interested.active {
-  background: #2900E0;
+  background: #2900e0;
   color: white;
 }
 
 .event-btn.going.active {
-  background: #81C102;
+  background: #81c102;
   color: white;
 }
 
@@ -656,7 +683,7 @@ body {
   display: flex;
   gap: 0;
   margin-bottom: 16px;
-  border-bottom: 1px solid #21364A;
+  border-bottom: 1px solid #21364a;
   width: 100%;
 }
 
@@ -688,7 +715,8 @@ body {
   width: 18px;
   height: 20px;
   flex-shrink: 0;
-  filter: brightness(0) saturate(100%) invert(64%) sepia(18%) saturate(367%) hue-rotate(180deg) brightness(91%) contrast(94%);
+  filter: brightness(0) saturate(100%) invert(64%) sepia(18%) saturate(367%)
+    hue-rotate(180deg) brightness(91%) contrast(94%);
 }
 
 .filter-tab.active svg,
@@ -709,7 +737,7 @@ body {
 .dropdown-btn {
   width: 100%;
   padding: 12px 16px;
-  background: #21364A;
+  background: #21364a;
   border: none;
   border-radius: 8px;
   color: white;
@@ -835,7 +863,7 @@ body {
   font-weight: 790;
   font-size: 16px;
   line-height: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -847,7 +875,7 @@ body {
   font-weight: 457;
   font-size: 14px;
   line-height: 21px;
-  color: #8FADCC;
+  color: #8fadcc;
   margin: 0;
 }
 
@@ -874,7 +902,7 @@ body {
   font-weight: 457;
   font-size: 14px;
   line-height: 21px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .live-update img {
@@ -896,11 +924,11 @@ body {
   font-weight: 457;
   font-size: 14px;
   line-height: 21px;
-  color: #D2FFD3;
+  color: #d2ffd3;
 }
 
 .crowd-status.very-crowded {
-  color: #FF0303;
+  color: #ff0303;
 }
 
 .crowd-status img {
@@ -932,12 +960,12 @@ body {
   padding: 6px 12px;
   border: none;
   border-radius: 20px;
-  background: #21364A;
+  background: #21364a;
   font-family: "SF Compact Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
   cursor: pointer;
-  color: #CCCACA;
+  color: #cccaca;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -949,12 +977,12 @@ body {
 }
 
 .my-event-buttons .event-btn.interested.active {
-  background: #2900E0;
+  background: #2900e0;
   color: white;
 }
 
 .my-event-buttons .event-btn.going.active {
-  background: #81C102;
+  background: #81c102;
   color: white;
 }
 
@@ -987,7 +1015,7 @@ body {
   font-family: "SF Compact Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: #4CAF50;
+  color: #4caf50;
   margin-bottom: 4px;
 }
 
@@ -998,15 +1026,13 @@ body {
   font-family: "SF Compact Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: #D2FFD3;
+  color: #d2ffd3;
 }
 
 .my-event-buttons {
   display: flex;
   gap: 12px;
 }
-
-
 
 .footer {
   background-color: #172633;
@@ -1155,7 +1181,7 @@ body {
   background: #19283a;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -1190,10 +1216,12 @@ body {
   height: 24px;
 }
 .crowd-red img {
-  filter: invert(27%) sepia(99%) saturate(7496%) hue-rotate(355deg) brightness(97%) contrast(119%);
+  filter: invert(27%) sepia(99%) saturate(7496%) hue-rotate(355deg)
+    brightness(97%) contrast(119%);
 }
 .crowd-green img {
-  filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(97%) contrast(119%);
+  filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg)
+    brightness(97%) contrast(119%);
 }
 
 .exhibit-link {
@@ -1284,11 +1312,11 @@ body {
 }
 
 .crowd-status span {
-  color: #D2FFD3;
+  color: #d2ffd3;
 }
 
 .crowd-status.very-crowded span {
-  color: #FF0303;
+  color: #ff0303;
 }
 
 .crowd-status img {
