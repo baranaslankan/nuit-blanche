@@ -39,8 +39,14 @@
         <span style="color:#fff;font-size:13px;">Not too crowded</span>
       </div>
       <div style="margin:16px 0 0 0;display:flex;gap:8px;">
-        <button class="my-event-btn active"><img src="assets/images/heart.svg" width="18" height="18" alt="Interested" />Interested</button>
-        <button class="my-event-btn going-active"><img src="assets/images/tic.svg" width="18" height="18" alt="Going" />Going</button>
+        <button class="event-btn interested active" data-title="Electric Fountain" data-location="380 Queen st" data-date="Fri, Oct 4 • 7:00 PM" data-image="assets/images/electric.svg">
+          <img src="assets/images/heart.svg" alt="Heart" class="event-btn-icon" />
+          Interested
+        </button>
+        <button class="event-btn going active" data-title="Electric Fountain" data-location="380 Queen st" data-date="Fri, Oct 4 • 7:00 PM" data-image="assets/images/electric.svg">
+          <img src="assets/images/tic.svg" alt="Check" class="event-btn-icon" />
+          Going
+        </button>
       </div>
     </div>
     <div style="margin-top:24px;">
@@ -90,5 +96,63 @@
       <span class="footer-text">Profile</span>
     </button>
   </footer>
+
+  <script>
+    // Handle event button clicks
+    function handleEventButton(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const button = e.target.closest('.event-btn');
+      if (!button) return;
+      
+      const title = button.getAttribute('data-title');
+      const location = button.getAttribute('data-location');
+      const date = button.getAttribute('data-date');
+      const image = button.getAttribute('data-image');
+      
+      if (!title || !location || !date || !image) return;
+      
+      const event = {
+        title: title,
+        location: location,
+        date: date,
+        image: image,
+        crowdStatus: "Not too crowded"
+      };
+      
+      let interested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
+      let going = JSON.parse(localStorage.getItem('goingEvents') || '[]');
+
+      if (button.classList.contains('interested')) {
+        const index = interested.findIndex(e => e.title === event.title);
+        if (index > -1) {
+          interested.splice(index, 1);
+          button.classList.remove('active');
+        } else {
+          interested.push(event);
+          button.classList.add('active');
+        }
+        localStorage.setItem('interestedEvents', JSON.stringify(interested));
+      } else if (button.classList.contains('going')) {
+        const index = going.findIndex(e => e.title === event.title);
+        if (index > -1) {
+          going.splice(index, 1);
+          button.classList.remove('active');
+        } else {
+          going.push(event);
+          button.classList.add('active');
+        }
+        localStorage.setItem('goingEvents', JSON.stringify(going));
+      }
+    }
+
+    // Add event listeners when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.event-btn').forEach(btn => {
+        btn.addEventListener('click', handleEventButton);
+      });
+    });
+  </script>
 </body>
 </html>

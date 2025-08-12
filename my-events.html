@@ -209,13 +209,22 @@
       const eventsList = document.getElementById('myEventsList');
       const noEventsMessage = document.getElementById('noEventsMessage');
 
-      if (eventsToShow.length === 0) {
-        noEventsMessage.style.display = 'block';
-        eventsList.innerHTML = '';
+      if (!eventsList) {
+        console.error('myEventsList element not found');
         return;
       }
 
-      noEventsMessage.style.display = 'none';
+      if (eventsToShow.length === 0) {
+        if (noEventsMessage) {
+          noEventsMessage.style.display = 'block';
+        }
+        eventsList.innerHTML = '<div class="no-events-message"><p>No events found. Start by marking events as "Interested" or "Going" on the home page!</p></div>';
+        return;
+      }
+
+      if (noEventsMessage) {
+        noEventsMessage.style.display = 'none';
+      }
       
       const eventsHTML = eventsToShow.map(event => {
         const isInterested = interested.some(e => e.title === event.title);
@@ -259,19 +268,41 @@
 
       eventsList.innerHTML = eventsHTML;
 
-      // Add event listeners to buttons after DOM update
-      setTimeout(() => {
-        document.querySelectorAll('.my-events-list .event-btn').forEach(btn => {
-          btn.addEventListener('click', handleEventButton);
-        });
-      }, 0);
+      // Use event delegation for better event handling
+      if (eventsList) {
+        eventsList.removeEventListener('click', handleEventDelegation);
+        eventsList.addEventListener('click', handleEventDelegation);
+      }
+    }
+
+    // Handle clicks using event delegation
+    function handleEventDelegation(e) {
+      const button = e.target.closest('.event-btn');
+      if (button) {
+        handleEventButton(e);
+      }
+    }
+
+    // Add event listeners to all event buttons
+    function addEventListeners() {
+      // Event delegation is now used, so this function is not needed
+      // but keeping it for compatibility
     }
 
     // Handle event button clicks
     function handleEventButton(e) {
-      const button = e.currentTarget;
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const button = e.target.closest('.event-btn');
+      if (!button) return;
+      
       const type = button.getAttribute('data-type');
-      const event = JSON.parse(button.getAttribute('data-event'));
+      const eventData = button.getAttribute('data-event');
+      
+      if (!type || !eventData) return;
+      
+      const event = JSON.parse(eventData);
       
       let interested = JSON.parse(localStorage.getItem('interestedEvents') || '[]');
       let going = JSON.parse(localStorage.getItem('goingEvents') || '[]');
@@ -299,68 +330,72 @@
       renderEvents(activeFilter);
     }
 
-    // Filter tabs functionality
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const filter = tab.getAttribute('data-filter');
-        renderEvents(filter);
+    // Filter tabs functionality  
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const filter = tab.getAttribute('data-filter');
+          renderEvents(filter);
+        });
       });
-    });
 
-    // Hamburger menu functionality
-    const menuBtn = document.querySelector('.menu-btn');
-    const hamburger = document.querySelector('.hamburger');
-    const menu = document.querySelector('.menu-dropdown');
+      // Hamburger menu functionality
+      const menuBtn = document.querySelector('.menu-btn');
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.menu-dropdown');
 
-    menuBtn.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
+      if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          
+          if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+          } else {
+            menu.style.display = 'block';
+          }
+        });
+      }
+
+      // Initialize page with sample data
+      const sampleEvents = [
+        {
+          title: "Balloonscape",
+          location: "181 Bay St", 
+          date: "Fri, Jul 12 • 7:00 PM",
+          image: "assets/images/3.svg",
+          crowdStatus: "Not too crowded"
+        },
+        {
+          title: "Electric Fountain",
+          location: "380 Queen st",
+          date: "Fri, Oct 4 • 7:00 PM", 
+          image: "assets/images/electric.svg",
+          crowdStatus: "Very crowded"
+        },
+        {
+          title: "Under the Sea",
+          location: "The Tech Hub",
+          date: "Fri, Oct 4 • 7:00 PM",
+          image: "assets/images/sea.svg", 
+          crowdStatus: "Not too crowded"
+        },
+        {
+          title: "OVIAS",
+          location: "225 Queen",
+          date: "Fri, Jul 12 • 7:00 PM",
+          image: "assets/images/2.svg",
+          crowdStatus: "Not too crowded"
+        }
+      ];
       
-      if (menu.style.display === 'block') {
-        menu.style.display = 'none';
-      } else {
-        menu.style.display = 'block';
-      }
+      // Set sample data for demo
+      localStorage.setItem('interestedEvents', JSON.stringify([sampleEvents[0], sampleEvents[2], sampleEvents[3]]));
+      localStorage.setItem('goingEvents', JSON.stringify([sampleEvents[1], sampleEvents[3]]));
+      
+      renderEvents('all');
     });
-
-    // Initialize page
-    // Force refresh sample data with correct images
-    const sampleEvents = [
-      {
-        title: "Balloonscape",
-        location: "181 Bay St", 
-        date: "Fri, Jul 12 • 7:00 PM",
-        image: "assets/images/3.svg",
-        crowdStatus: "Not too crowded"
-      },
-      {
-        title: "Electric Fountain",
-        location: "380 Queen st",
-        date: "Fri, Oct 4 • 7:00 PM", 
-        image: "assets/images/electric.svg",
-        crowdStatus: "Very crowded"
-      },
-      {
-        title: "Under the Sea",
-        location: "The Tech Hub",
-        date: "Fri, Oct 4 • 7:00 PM",
-        image: "assets/images/sea.svg", 
-        crowdStatus: "Not too crowded"
-      },
-      {
-        title: "OVIAS",
-        location: "225 Queen",
-        date: "Fri, Jul 12 • 7:00 PM",
-        image: "assets/images/2.svg",
-        crowdStatus: "Not too crowded"
-      }
-    ];
-    
-    // Clear old data and set new data with correct images
-    localStorage.setItem('interestedEvents', JSON.stringify([sampleEvents[0], sampleEvents[2], sampleEvents[3]]));
-    localStorage.setItem('goingEvents', JSON.stringify([sampleEvents[1], sampleEvents[3]]));
-    
-    renderEvents();
   </script>
 </html>
